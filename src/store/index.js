@@ -6,7 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     loading: false,
-    selectedFile: null
+    showDrawer: false,
+    selectedFile: null,
+    originalImg: null,
+    convertedImg: null,
+    editedImgList: [],
   },
   mutations: {},
   actions: {},

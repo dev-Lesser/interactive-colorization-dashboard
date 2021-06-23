@@ -1,41 +1,48 @@
 <template>
-<v-layout>
+<div>
     <v-file-input
     v-model="selected"
+    @change="preview"
     accept="image/*"
     label="Upload Image file"
   ></v-file-input>
   <v-btn @click="uploadFile">predict</v-btn>
-</v-layout>
+  
+</div>
+  
 </template>
 <script>
 import axios from 'axios'
 export default {
     data() {
         return {
-            selected: null
+            selected: null,
+            image: null,
+            url: null,
         }
     },
     mounted(){
     },
     computed:{
-        selectedFile(){
-            return this.$store.state.selectedFile;
+        previewFile(){
+            return this.$store.state.originalImg;
         }
     },
-    watch:{
-        selected(){
-            console.log(this.selectedFile)
-            this.$store.state.selectedFile = this.selected;
-        }
-    },
+    
     methods:{
+        async preview(){
+            this.$store.state.originalImg= URL.createObjectURL(this.selected)
+        },
         async uploadFile(){
+            this.$store.state.loading = true;
             var form = new FormData();
             form.append('file', this.selected);
-            console.log(form)
-            var res = await axios.post('http://localhost:8000/api/v1/colorize', form, {'Content-Type':'multipart/form-data'})
-            console.log(res.data)
+            var res = await axios.post('http://localhost:8000/api/v1/colorize', form,)
+
+            this.$store.state.convertedImg = 'data:image/png;base64,'+res.data
+            this.$store.state.loading = false;
+            this.$store.state.editedImgList.push('data:image/png;base64,'+res.data)
+            this.$store.state.showDrawer = true;
         }
     }
 }
