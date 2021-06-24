@@ -5,8 +5,9 @@
       color="blue-grey darken-3"
       dark
     >
+    <v-app-bar-title>Interactive Colorization</v-app-bar-title>
+    <v-spacer/>
     <v-app-bar-nav-icon @click.stop="$store.state.showDrawer = !$store.state.showDrawer"></v-app-bar-nav-icon>
-     
     </v-app-bar>
 
     <v-main>

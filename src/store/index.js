@@ -10,7 +10,12 @@ export default new Vuex.Store({
     selectedFile: null,
     originalImg: null,
     convertedImg: null,
+    grayImg: null,
     editedImgList: [],
+    originalX: null,
+    originalY: null,
+    setColor: null,
+    markers: []
   },
   mutations: {},
   actions: {},

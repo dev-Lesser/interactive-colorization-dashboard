@@ -1,40 +1,42 @@
 <template>
-
-    <div>
-
-
-        <Chrome v-model="colors"></Chrome>
-        <swatches v-model="colors" ></swatches>
-        <v-progress-circular
-            indeterminate
-            color="black"
-            v-if='loading'
-            ></v-progress-circular>
- 
-
+    <div  width="320">
+        <v-card-subtitle>
+            ** Choose your custom color **
+        </v-card-subtitle>
+        
+        <v-swatches v-model="color" inline></v-swatches>
+        
+        
     </div>
-
-
 </template>
 <script>
-import {Chrome, Swatches} from 'vue-color'
+import VSwatches from 'vue-swatches'
+import 'vue-swatches/dist/vue-swatches.css'
 export default {
     components:{
-        Chrome, Swatches
+         VSwatches 
     },
     data() {
         return{
-            colors:{
-                hex: '#194d33',
-
-            }
+            color: null,
         }
         
     },
     computed:{
-      loading(){
-            return this.$store.state.loading;
-        },
+      
+    },
+
+    watch:{
+        color: function(){
+            document.getElementById("palette").style.background = this.color;
+            this.$store.state.setColor = this.color;
+        }
     }
 }
 </script>
+<style scoped>
+#palette{
+    height: 100%;
+    overflow-y: hidden;
+}
+</style>
