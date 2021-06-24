@@ -1,11 +1,11 @@
 <template>
     <v-card class="ma-3" id="container" width="400" height="100%" flat>
-        <v-card-title >
+        <v-card-subtitle >
             Colorization
             <v-spacer/>
             <!-- <v-btn color="red" @click="addMarker(cnt)">Add</v-btn> -->
             
-        </v-card-title>
+        </v-card-subtitle>
         <!-- <div  v-for="i,key in $store.state.markers" :key="key"> -->
                 
         
@@ -16,7 +16,7 @@
             
             </div>
             <v-card v-if="originalImg===null" height="400" width="100%" style="display:flex;justify-content:center;align-items:center;">
-                <v-card-subtitle>please upload your image</v-card-subtitle>
+                <v-card-subtitle>Please upload your image</v-card-subtitle>
             </v-card>
             <img :src="originalImg"     
             v-else-if="$store.state.originalX > $store.state.originalY"
@@ -66,7 +66,11 @@ import axios from 'axios'
             },
             setColor(){
                 return this.$store.state.setColor;
+            },
+            timestamp(){
+                return this.$store.state.timestamp;
             }
+            
         },
         mounted() {
             this.dragItem = document.querySelector("#palette")
@@ -104,7 +108,7 @@ import axios from 'axios'
                 form.append('pointsY', parseInt(this.initialX*256 / divWidth));
                 form.append('colors', this.setColor);
         
-                var res = await axios.post('http://localhost:8000/api/v1/colorize/point', form,)
+                var res = await axios.post(`http://localhost:8000/api/v1/colorize/point?timestamp=${this.timestamp}`, form,)
                 this.$store.state.convertedImg = 'data:image/png;base64,'+res.data
                 this.$store.state.loading = false;
                 if (this.$store.state.editedImgList.length>=6){

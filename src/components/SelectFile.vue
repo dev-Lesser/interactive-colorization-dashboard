@@ -40,12 +40,19 @@ export default {
                 this.$store.state.loading = false;
                 return false
             }
-            await axios.get('http://localhost:8000/api/v1/clear')
+            
+            if(this.$store.state.timestamp!=null){
+                await axios.get(`http://localhost:8000/api/v1/clear?timestamp=${this.$store.state.timestamp}`)
+            }
+            var timestamp = this.selected.lastModified;
+            this.$store.state.timestamp = timestamp;
+
             
             var form = new FormData();
             form.append('file', this.selected);
-            var res = await axios.post('http://localhost:8000/api/v1/colorize', form,)
-
+            
+            
+            var res = await axios.post(`http://localhost:8000/api/v1/colorize?timestamp=${timestamp}`, form,)
             this.$store.state.convertedImg = 'data:image/png;base64,'+res.data
             this.$store.state.loading = false;
             this.$store.state.editedImgList.push('data:image/png;base64,'+res.data)

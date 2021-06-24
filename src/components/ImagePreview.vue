@@ -1,12 +1,12 @@
 <template>
 <v-card class="ma-3" width="400" height="100%" flat>
-        <v-card-title>
+        <v-card-subtitle>
             {{ title }}
-        </v-card-title>
+        </v-card-subtitle>
 
         <v-layout wrap class="pa-2" style="width:100%;">
             <v-card v-if="originalImg==null" height="400" width="100%" style="display:flex;justify-content:center;align-items:center;">
-                <v-card-subtitle>please upload your image</v-card-subtitle>
+                <v-card-subtitle>Please upload your image</v-card-subtitle>
             </v-card>
             <img :src="originalImg" 
             style="border-radius: 10px;"

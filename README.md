@@ -1,5 +1,14 @@
 # interactive-colorization-dashboard
+## Server
+https://github.com/dev-Lesser/interactive-colorization-server
 
+---
+
+## Examples 
+#### default colorization
+![example](./example1.png)
+#### interactive colorization
+![example](./example2.png)
 ## Project setup
 ```
 yarn install

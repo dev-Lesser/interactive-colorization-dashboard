@@ -15,7 +15,8 @@ export default new Vuex.Store({
     originalX: null,
     originalY: null,
     setColor: null,
-    markers: []
+    markers: [],
+    timestamp: null,
   },
   mutations: {},
   actions: {},
